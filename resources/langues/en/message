@@ -1,0 +1,6 @@
+<?php
+return [
+    'not_found' => 'Page Not Found',
+    'go_home' => 'Go Back To Home',
+];
+// This file contains English language messages for the application.
