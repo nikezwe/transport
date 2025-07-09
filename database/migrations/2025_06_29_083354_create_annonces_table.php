@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('annonces', function (Blueprint $table) {
-             $table->enum('direction', ['chine-burundi', 'burundi-chine']);
+         $table->enum('direction', ['chine-burundi', 'burundi-chine']);
         $table->date('date_depart');
         $table->date('date_limite')->nullable();
         $table->string('ville_depart');

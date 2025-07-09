@@ -1,7 +1,6 @@
 @extends('layouts.app')
 @section('title','CL SKY - Transport Chine-Burundi')
 @section('content')
-
    <section class="hero" id="accueil">
         <div class="container">
             <div class="hero-content">
@@ -59,17 +58,17 @@
 
     <!-- Fact Start -->
     <div class="container-xxl py-5">
-        <div class="container py-5">
+        <div class="container py-5  text-center">
             <div class="row g-5">
-                <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="col-lg-12 wow fadeInUp" data-wow-delay="0.1s">
                     <h6 class="text-secondary text-uppercase mb-3">Some Facts</h6>
                     <h1 class="mb-5">#1 Place To Manage All Of Your Shipments</h1>
                     <p class="mb-5">Tempor erat elitr rebum at clita. Diam dolor diam ipsum sit. Aliqu diam amet diam et eos. Clita erat ipsum et lorem et sit, sed stet lorem sit clita duo justo magna dolore erat amet</p>
-                    <div class="d-flex align-items-center">
+                    {{-- <div class="d-flex align-items-center">
                         <i class="fa fa-headphones fa-2x flex-shrink-0 bg-primary p-3 text-white"></i>
-                    </div>
+                    </div> --}}
                 </div>
-                <div class="col-lg-6">
+                {{-- <div class="col-lg-6">
                     <div class="row g-4 align-items-center">
                         <div class="col-sm-6">
                             <div class="bg-primary p-4 mb-4 wow fadeIn" data-wow-delay="0.3s">
@@ -91,7 +90,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> --}}
             </div>
         </div>
     </div>
@@ -278,7 +277,7 @@
         </div>
     </div> --}}
     <!-- Pricing End -->
-
+            {{-- <h2>temoignages,services,membres</h2> --}}
     <!-- Quote Start -->
     <div class="container-xxl py-5">
         <div class="container py-5">
@@ -413,7 +412,7 @@
         <div class="container py-5">
             <div class="text-center">
                 <h6 class="text-secondary text-uppercase">Testimonial</h6>
-                <h1 class="mb-0">Our Clients Say!</h1>
+                <h1 class="mb-0">Our Clients!</h1>
             </div>
         </div>
     </div>

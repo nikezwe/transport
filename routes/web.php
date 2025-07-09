@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AnnonceController;
+use App\Http\Controllers\admin\AnnonceController;
 
 Route::get('/', function () {
     return view('pages.index');
