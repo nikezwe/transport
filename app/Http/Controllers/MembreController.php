@@ -11,7 +11,7 @@ use Illuminate\View\View;
 
 class MembreController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request): View
     {
         $membres = Membre::all();
 
@@ -20,44 +20,55 @@ class MembreController extends Controller
         ]);
     }
 
-    public function create(Request $request): Response
+    public function create(Request $request): View
     {
         return view('membre.create');
     }
 
-    public function store(MembreStoreRequest $request): Response
+    public function store(MembreStoreRequest $request): RedirectResponse
     {
-        $membre = Membre::create($request->validated());
+        $data = $request->validated();
 
-        $request->session()->flash('membre.id', $membre->id);
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('images', 'public');
+        }
+
+        $membre = Membre::create($data);
+
+        $request->session()->put('membre.id', $membre->id);
 
         return redirect()->route('membres.index');
     }
 
-    public function show(Request $request, Membre $membre): Response
+    public function show(Request $request, Membre $membre): View
     {
         return view('membre.show', [
             'membre' => $membre,
         ]);
     }
-
-    public function edit(Request $request, Membre $membre): Response
+    public function edit(Request $request, Membre $membre): View
     {
         return view('membre.edit', [
             'membre' => $membre,
         ]);
     }
 
-    public function update(MembreUpdateRequest $request, Membre $membre): Response
+    public function update(MembreUpdateRequest $request, Membre $membre): RedirectResponse
     {
-        $membre->update($request->validated());
+        $data = $request->validated();
 
-        $request->session()->flash('membre.id', $membre->id);
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('images', 'public');
+        }
+
+        $membre->update($data);
+
+        session()->flash('membre.id', $membre->id);
 
         return redirect()->route('membres.index');
     }
 
-    public function destroy(Request $request, Membre $membre): Response
+    public function destroy(Request $request, Membre $membre): RedirectResponse
     {
         $membre->delete();
 

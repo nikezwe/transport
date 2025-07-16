@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Http\Requests\payStoreRequest;
@@ -11,55 +10,55 @@ use Illuminate\View\View;
 
 class paysController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request): View
     {
-        $pays = Pay::all();
+        $pays = Pays::all();
 
-        return view('pay.index', [
+        return view('pays.index', [
             'pays' => $pays,
         ]);
     }
 
-    public function create(Request $request): Response
+    public function create(Request $request): View
     {
-        return view('pay.create');
+        return view('pays.create');
     }
 
-    public function store(payStoreRequest $request): Response
+    public function store(payStoreRequest $request): RedirectResponse
     {
-        $pay = Pay::create($request->validated());
+        $pays = Pays::create($request->validated());
 
-        $request->session()->flash('pay.id', $pay->id);
+        session()->flash('pays.id', $pays->id);
 
         return redirect()->route('pays.index');
     }
 
-    public function show(Request $request, pay $pay): Response
+    public function show(Request $request, Pays $pays): View
     {
         return view('pay.show', [
-            'pay' => $pay,
+            'pays' => $pays,
         ]);
     }
 
-    public function edit(Request $request, pay $pay): Response
+    public function edit(Request $request, Pays $pays): View
     {
-        return view('pay.edit', [
-            'pay' => $pay,
+        return view('pays.edit', [
+            'pays' => $pays,
         ]);
     }
 
-    public function update(payUpdateRequest $request, pay $pay): Response
+    public function update(payUpdateRequest $request, Pays $pays): RedirectResponse
     {
-        $pay->update($request->validated());
+        $pays->update($request->validated());
 
-        $request->session()->flash('pay.id', $pay->id);
+        session()->flash('pays.id', $pays->id);
 
         return redirect()->route('pays.index');
     }
 
-    public function destroy(Request $request, pay $pay): Response
+    public function destroy(Request $request, Pays $pays): RedirectResponse
     {
-        $pay->delete();
+        $pays->delete();
 
         return redirect()->route('pays.index');
     }

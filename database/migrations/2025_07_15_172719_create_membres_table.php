@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->string('nom');
             $table->string('prenom');
-            $table->string('image');
-            $table->string('designation');
+            $table->string('image')->nullable();
+            $table->string('designation')->nullable();
             $table->string('fb_link')->nullable();
             $table->string('tw_link')->nullable();
             $table->string('ig_link')->nullable();

@@ -19,6 +19,9 @@ return new class extends Migration
             $table->foreignId('trajet_id')->constrained();
             $table->string('image')->nullable();
             $table->text('description');
+            $table->integer('prix')->default(0);
+            $table->integer('duree')->default(0);
+            $table->boolean('actif')->default(true);
             $table->dateTime('date_depart');
             $table->string('type')->default('transport');
             $table->timestamps();

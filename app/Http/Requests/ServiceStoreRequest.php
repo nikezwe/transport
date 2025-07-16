@@ -24,7 +24,6 @@ class ServiceStoreRequest extends FormRequest
             'trajet_id' => ['required', 'integer', 'exists:trajets,id'],
             'description' => ['required', 'string'],
             'date_depart' => ['required'],
-            'prix' => ['required', 'numeric', 'between:-99999999.99,99999999.99'],
             'type' => ['required', 'string'],
         ];
     }

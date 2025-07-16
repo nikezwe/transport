@@ -11,7 +11,7 @@ use Illuminate\View\View;
 
 class ProduitController extends Controller
 {
-    public function index(Request $request): Response
+    public function index(Request $request): View
     {
         $produits = Produit::all();
 
@@ -20,44 +20,44 @@ class ProduitController extends Controller
         ]);
     }
 
-    public function create(Request $request): Response
+    public function create(Request $request): View
     {
         return view('produit.create');
     }
 
-    public function store(ProduitStoreRequest $request): Response
+    public function store(ProduitStoreRequest $request): RedirectResponse
     {
         $produit = Produit::create($request->validated());
 
-        $request->session()->flash('produit.id', $produit->id);
+        session()->flash('produit.id', $produit->id);
 
         return redirect()->route('produits.index');
     }
 
-    public function show(Request $request, Produit $produit): Response
+    public function show(Request $request, Produit $produit): View
     {
         return view('produit.show', [
             'produit' => $produit,
         ]);
     }
 
-    public function edit(Request $request, Produit $produit): Response
+    public function edit(Request $request, Produit $produit): View
     {
         return view('produit.edit', [
             'produit' => $produit,
         ]);
     }
 
-    public function update(ProduitUpdateRequest $request, Produit $produit): Response
+    public function update(ProduitUpdateRequest $request, Produit $produit): RedirectResponse
     {
         $produit->update($request->validated());
 
-        $request->session()->flash('produit.id', $produit->id);
+        session()->flash('produit.id', $produit->id);
 
         return redirect()->route('produits.index');
     }
 
-    public function destroy(Request $request, Produit $produit): Response
+    public function destroy(Request $request, Produit $produit): RedirectResponse
     {
         $produit->delete();
 

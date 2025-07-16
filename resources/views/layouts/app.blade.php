@@ -98,20 +98,20 @@
                     <i class="fas fa-home me-2"></i>Dashboard
                 </a>
                 
-                <a class="nav-link " href="">
-                    <i class="fas fa-cogs me-2"></i>Gestion des Services
+                <a class="nav-link {{ Request::routeIs('services.*') ? 'active' : '' }}" href="{{ route('services.index') }}">
+                    <i class="fas fa-concierge-bell me-2"></i>Services
                 </a>
                 
-                <a class="nav-link" href="">
-                    <i class="fas fa-box me-2"></i>Produits
+                <a class="nav-link {{ Request::routeIs('produits.*') ? 'active' : '' }}" href="{{ route('produits.index') }}">
+                    <i class="fas fa-boxes me-2"></i>Produits
                 </a>
                 
                 <a class="nav-link {{ Request::routeIs('membres.*') ? 'active' : '' }}" href="{{ route('membres.index') }}">
                     <i class="fas fa-users me-2"></i>Membres
                 </a>
                 
-                <a class="nav-link" href="">
-                    <i class="fas fa-bullhorn me-2"></i>Annonces
+                <a class="nav-link {{ Request::routeIs('pays.*') ? 'active' : '' }}" href="{{ route('pays.index') }}">
+                    <i class="fas fa-flag me-2"></i>Pays
                 </a>
                 {{-- <a class="nav-link {{ Request::routeIs('annonces.*') ? 'active' : '' }}" href="{{ route('annonces.index') }}">
                     <i class="fas fa-bullhorn me-2"></i>Annonces

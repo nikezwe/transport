@@ -22,7 +22,7 @@ class MembreUpdateRequest extends FormRequest
         return [
             'nom' => ['required', 'string'],
             'prenom' => ['required', 'string'],
-            'image' => ['required', 'string'],
+            'image' => ['nullable', 'image' ],
             'designation' => ['required', 'string'],
             'fb_link' => ['nullable', 'string'],
             'tw_link' => ['nullable', 'string'],
