@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\MembreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -71,3 +72,20 @@ Route::get('/404', function () {
 Route::get('/contact', function () {
     return view('pages.contact');
 })->name('contact');
+
+
+Route::resource('membres', App\Http\Controllers\MembreController::class);
+
+
+Route::resource('membres', App\Http\Controllers\MembreController::class);
+
+Route::resource('contacts', App\Http\Controllers\ContactController::class);
+
+Route::resource('trajets', App\Http\Controllers\TrajetController::class);
+
+Route::resource('services', App\Http\Controllers\ServiceController::class);
+
+Route::resource('produits', App\Http\Controllers\ProduitController::class);
+
+
+Route::resource('pays', App\Http\Controllers\paysController::class);

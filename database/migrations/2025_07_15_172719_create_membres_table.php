@@ -17,7 +17,13 @@ return new class extends Migration
             $table->string('prenom');
             $table->string('image');
             $table->string('designation');
+            $table->string('fb_link')->nullable();
+            $table->string('tw_link')->nullable();
+            $table->string('ig_link')->nullable();
             $table->timestamps();
+             // Index pour améliorer les performances de recherche
+            $table->index(['nom', 'prenom']);
+            $table->index('designation');
         });
     }
 

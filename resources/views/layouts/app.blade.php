@@ -106,7 +106,7 @@
                     <i class="fas fa-box me-2"></i>Produits
                 </a>
                 
-                <a class="nav-link " href="">
+                <a class="nav-link {{ Request::routeIs('membres.*') ? 'active' : '' }}" href="{{ route('membres.index') }}">
                     <i class="fas fa-users me-2"></i>Membres
                 </a>
                 

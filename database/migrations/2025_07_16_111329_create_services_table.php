@@ -11,14 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('services', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('annonce_id')->constrained('annonces')->onDelete('cascade');
-            $table->string('type');
-            $table->string('image');
-            $table->string('description');
+            $table->foreignId('membre_id')->constrained();
+            $table->foreignId('trajet_id')->constrained();
+            $table->string('image')->nullable();
+            $table->text('description');
+            $table->dateTime('date_depart');
+            $table->string('type')->default('transport');
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**

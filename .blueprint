@@ -1,0 +1,22 @@
+created:
+    - app/Http/Controllers/paysController.php
+    - database/factories/PaysFactory.php
+    - database/migrations/2025_07_16_112906_create_pays_table.php
+    - app/Models/Pays.php
+    - tests/Feature/Http/Controllers/paysControllerTest.php
+    - app/Http/Requests/payStoreRequest.php
+    - app/Http/Requests/payUpdateRequest.php
+    - resources/views/pay/index.blade.php
+    - resources/views/pay/create.blade.php
+    - resources/views/pay/show.blade.php
+    - resources/views/pay/edit.blade.php
+updated:
+    - routes/web.php
+models:
+    User: { name: string, email: string, email_verified_at: 'timestamp nullable default:NULL', password: string, role: "string default:'user'", remember_token: 'string:100 nullable default:NULL' }
+    Membre: { nom: string, prenom: string, image: string, designation: string, fb_link: 'string nullable', tw_link: 'string nullable', ig_link: 'string nullable' }
+    Contact: { membre_id: 'id foreign', name: string, email: string, subject: string, message: string }
+    Trajet: { pays_depart_id: 'id foreign:pays', pays_arrivee_id: 'id foreign:pays', ville_depart: string, ville_arrivee: string, date_depart: date, date_arrivee: date }
+    Service: { membre_id: 'id foreign', trajet_id: 'id foreign', description: text, date_depart: datetime, prix: 'decimal:10,2', type: 'string default:transport' }
+    Produit: { membre_id: 'id foreign', nom: string, description: 'text nullable', poids: 'decimal:8,2 nullable', est_publie: 'boolean default:false' }
+    Pays: { nom: string }

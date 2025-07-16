@@ -1,0 +1,11 @@
+models:
+  Pays:
+    nom: string
+
+
+controllers:
+  pays:
+    resource: web
+  
+
+

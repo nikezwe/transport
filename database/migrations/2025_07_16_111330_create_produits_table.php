@@ -11,15 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
+        Schema::disableForeignKeyConstraints();
+
         Schema::create('produits', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('annonce_id')->constrained()->onDelete('cascade');
-            $table->string('type'); 
-            $table->string('designation')->nullable(); 
-            $table->integer('quantite')->nullable();
-            $table->decimal('valeur', 10, 2)->nullable();
+            $table->foreignId('membre_id')->constrained();
+            $table->string('nom');
+            $table->text('description')->nullable();
+            $table->decimal('poids', 8, 2)->nullable();
+            $table->boolean('est_publie')->default(false);
             $table->timestamps();
         });
+
+        Schema::enableForeignKeyConstraints();
     }
 
     /**
