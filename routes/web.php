@@ -4,10 +4,9 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MembreController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\TrajetController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\ProduitController;
-use App\Http\Controllers\paysController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -85,10 +84,11 @@ Route::resource('membres', App\Http\Controllers\MembreController::class);
 
 Route::resource('contacts', App\Http\Controllers\ContactController::class);
 
-Route::resource('trajets', App\Http\Controllers\TrajetController::class);
-
 Route::resource('services', App\Http\Controllers\ServiceController::class);
 
 Route::resource('produits', App\Http\Controllers\ProduitController::class);
+Route::resource('annonces', App\Http\Controllers\AnnonceController::class);
+Route::POST('annonces/{annonce}/toggle-active', [App\Http\Controllers\AnnonceController::class, 'toggleActive'])->name('annonces.toggle-active');
 
-Route::resource('pays', App\Http\Controllers\paysController::class);
+Route::delete('contacts/destroy-multiple', [ContactController::class, 'destroyMultiple'])->name('contacts.destroy-multiple');
+Route::get('contacts/export', [ContactController::class, 'export'])->name('contacts.export');

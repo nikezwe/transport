@@ -109,13 +109,10 @@
                 <a class="nav-link {{ Request::routeIs('membres.*') ? 'active' : '' }}" href="{{ route('membres.index') }}">
                     <i class="fas fa-users me-2"></i>Membres
                 </a>
-                
-                <a class="nav-link {{ Request::routeIs('pays.*') ? 'active' : '' }}" href="{{ route('pays.index') }}">
-                    <i class="fas fa-flag me-2"></i>Pays
-                </a>
-                {{-- <a class="nav-link {{ Request::routeIs('annonces.*') ? 'active' : '' }}" href="{{ route('annonces.index') }}">
+
+                <a class="nav-link {{ Request::routeIs('annonces.*') ? 'active' : '' }}" href="{{ route('annonces.index') }}">
                     <i class="fas fa-bullhorn me-2"></i>Annonces
-                </a> --}}
+                </a>
                 
                 <hr class="mx-3" style="border-color: rgba(255, 255, 255, 0.2);">
                 

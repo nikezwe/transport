@@ -3,101 +3,128 @@
 namespace App\Http\Controllers;
 
 use App\Models\Service;
+use App\Models\Annonce;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
-use Illuminate\Routing\Controller;
-use App\Models\Membre;
-
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
     /**
-     * Afficher la liste des services
+     * Display a listing of the resource.
      */
-    public function index(): View
+    public function index()
     {
-        $services = Service::orderBy('nom')->paginate(10);
-        
+        $services = Service::with('annonce')->paginate(10);
         return view('service.index', compact('services'));
     }
 
     /**
-     * Afficher le formulaire de création
+     * Show the form for creating a new resource.
      */
-    public function create(): View
+    public function create()
     {
-        $membres = Membre::all(); 
-
-        return view('service.create', compact('membres'));
+        $annonces = Annonce::all();
+        return view('service.create', compact('annonces'));
     }
 
     /**
-     * Stocker un nouveau service
+     * Store a newly created resource in storage.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(Request $request)
     {
-        $validated = $request->validate([
-            'nom' => 'required|string|max:255',
-            'description' => 'required|string',
-            'prix' => 'required|numeric|min:0',
-            'duree' => 'required|integer|min:1',
-            'actif' => 'boolean'
+        $request->validate([
+            'annonce_id' => 'required|exists:annonces,id',
+            'type' => 'required|string|max:255',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required|string|max:1000',
         ]);
 
-        $validated['actif'] = $request->has('actif');
+        $imagePath = $request->file('image')->store('services', 'public');
 
-        Service::create($validated);
-
-        return redirect()->route('services.index')
-            ->with('success', 'Service créé avec succès!');
-    }
-
-    /**
-     * Afficher un service spécifique
-     */
-    public function show(Service $service): View
-    {
-        return view('services.show', compact('service'));
-    }
-
-    /**
-     * Afficher le formulaire d'édition
-     */
-    public function edit(Service $service): View
-    {
-        return view('services.edit', compact('service'));
-    }
-
-    /**
-     * Mettre à jour un service
-     */
-    public function update(Request $request, Service $service): RedirectResponse
-    {
-        $validated = $request->validate([
-            'nom' => 'required|string|max:255',
-            'description' => 'required|string',
-            'prix' => 'required|numeric|min:0',
-            'duree' => 'required|integer|min:1',
-            'actif' => 'boolean'
+        Service::create([
+            'annonce_id' => $request->annonce_id,
+            'type' => $request->type,
+            'image' => $imagePath,
+            'description' => $request->description,
         ]);
 
-        $validated['actif'] = $request->has('actif');
-
-        $service->update($validated);
-
         return redirect()->route('services.index')
-            ->with('success', 'Service mis à jour avec succès!');
+                        ->with('success', 'Service créé avec succès.');
     }
 
     /**
-     * Supprimer un service
+     * Display the specified resource.
      */
-    public function destroy(Service $service): RedirectResponse
+    public function show(Service $service)
     {
+        $service->load('annonce');
+        return view('service.show', compact('service'));
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(Service $service)
+    {
+        $annonces = Annonce::all();
+        return view('service.edit', compact('service', 'annonces'));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, Service $service)
+    {
+        $request->validate([
+            'annonce_id' => 'required|exists:annonces,id',
+            'type' => 'required|string|max:255',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'description' => 'required|string|max:1000',
+        ]);
+
+        $data = [
+            'annonce_id' => $request->annonce_id,
+            'type' => $request->type,
+            'description' => $request->description,
+        ];
+
+        if ($request->hasFile('image')) {
+            // Supprimer l'ancienne image
+            if ($service->image) {
+                Storage::disk('public')->delete($service->image);
+            }
+            
+            $data['image'] = $request->file('image')->store('services', 'public');
+        }
+
+        $service->update($data);
+
+        return redirect()->route('services.index')
+                        ->with('success', 'Service mis à jour avec succès.');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Service $service)
+    {
+        // Supprimer l'image associée
+        if ($service->image) {
+            Storage::disk('public')->delete($service->image);
+        }
+
         $service->delete();
 
         return redirect()->route('services.index')
-            ->with('success', 'Service supprimé avec succès!');
+                        ->with('success', 'Service supprimé avec succès.');
+    }
+
+    /**
+     * Get services by annonce
+     */
+    public function getServicesByAnnonce($annonceId)
+    {
+        $services = Service::where('annonce_id', $annonceId)->get();
+        return response()->json($services);
     }
 }

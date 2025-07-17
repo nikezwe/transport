@@ -4,11 +4,6 @@
 
 @section('page-header', 'Dashboard')
 
-@section('page-actions')
-    <button class="btn btn-primary">
-        <i class="fas fa-plus me-2"></i>Nouveau
-    </button>
-@endsection
 
 @section('content')
 <div class="row">

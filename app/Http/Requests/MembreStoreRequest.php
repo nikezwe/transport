@@ -22,7 +22,7 @@ class MembreStoreRequest extends FormRequest
         return [
             'nom' => ['required', 'string'],
             'prenom' => ['required', 'string'],
-            'image' => ['required', 'string'],
+            'image' => ['required', 'image', 'max:2048'], // 2MB max
             'designation' => ['required', 'string'],
             'fb_link' => ['nullable', 'string'],
             'tw_link' => ['nullable', 'string'],

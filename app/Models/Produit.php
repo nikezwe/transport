@@ -2,44 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Produit extends Model
+class produit extends Model
 {
-    use HasFactory;
+     protected $table = 'produits';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
     protected $fillable = [
-        'membre_id',
-        'nom',
-        'description',
-        'poids',
-        'est_publie',
+        'annonce_id', 'type', 'designation', 'quantite', 'valeur'
     ];
 
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function annonce()
     {
-        return [
-            'id' => 'integer',
-            'membre_id' => 'integer',
-            'poids' => 'decimal:2',
-            'est_publie' => 'boolean',
-        ];
-    }
-
-    public function membre(): BelongsTo
-    {
-        return $this->belongsTo(Membre::class);
+        return $this->belongsTo(Annonce::class);
     }
 }

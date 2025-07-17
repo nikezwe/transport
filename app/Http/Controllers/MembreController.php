@@ -13,7 +13,7 @@ class MembreController extends Controller
 {
     public function index(Request $request): View
     {
-        $membres = Membre::all();
+        $membres = Membre::paginate(10);
 
         return view('membre.index', [
             'membres' => $membres,
