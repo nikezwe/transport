@@ -8,7 +8,7 @@ class service extends Model
 {
     protected $table = 'services';
 
-    protected $giarded = [];
+    protected $guarded = [];
 
     public function annonce()
     {
