@@ -1,0 +1,14 @@
+Home (Accueil) : Présentation rapide du site, mise en avant des services, annonces récentes, liens vers réseaux sociaux.
+About (À propos) : Description de l’entreprise ou du projet, mission, valeurs, équipe.
+Services : Liste et description des services proposés.
+Anouncements (Annonces) : Section dédiée aux annonces, avec possibilité de filtrer par langue.
+Contact : Formulaire de contact, coordonnées, liens vers réseaux sociaux.
+Gestion multilingue :
+
+-- Utiliser le système de traduction Laravel (fichiers resources/lang).
+-- Permettre la publication d’annonces dans n’importe quelle langue.
+
+
+Ajout des réseaux sociaux :
+
+Ajouter les liens vers les réseaux sociaux (Facebook, Twitter, LinkedIn, Instagram, etc.) dans le footer ou le header.
